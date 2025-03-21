@@ -12,7 +12,7 @@ namespace StudentRegInlämning
 
         public void PrintMenu()
         {
-            Console.WriteLine("Välj vilket ett av följande alternativ:" +
+            Console.WriteLine("\nVälj vilket ett av följande alternativ i menyn:" +
                 "\n[1] Registrera en ny student" +
                 "\n[2] Ändra en student" +
                 "\n[3] Lista alla studenter");

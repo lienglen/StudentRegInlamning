@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentRegInlämning
 {
-    internal class Register
+    public class Register
     {
         StudentDbContext dbCtx = new StudentDbContext();//Detta är själva databaskopplingen för EF. Instans av StudentDbContext för att få med allt som finns i den klassen.
         public void RegNewStu()
@@ -28,12 +28,14 @@ namespace StudentRegInlämning
 
             dbCtx.Add(s1);//lägger till studenten i DBSetet som finns i klassen StudentDbContext
             dbCtx.SaveChanges();
+            Console.WriteLine($"Du har registrerat följande:\nFörnamn: {firstName}\nEfternamn: {lastName}\nStad: {city}");
         }
 
         public void ChangeStudent()
         {
-            Console.WriteLine("Vilken student vill du ändra? Ange Student-ID med en siffra");
+            Console.WriteLine("Vilken student vill du ändra? Ange Student-ID med en siffra:");
             int studentChoice = Convert.ToInt32(Console.ReadLine());
+             
 
             if (studentChoice != 0) 
             {
@@ -49,7 +51,7 @@ namespace StudentRegInlämning
                    case 1:
                        
                         var std1 = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
-
+                        Console.WriteLine($"Stundenten du har valt är {std1.StudentId} {std1.FirstName} {std1.LastName} {std1.City}");
                         Console.WriteLine("Skriv in det rätta förnamnet:");
                         std1.FirstName = Console.ReadLine();
                         dbCtx.SaveChanges();
@@ -57,7 +59,7 @@ namespace StudentRegInlämning
 
                         case 2:
                         var std2 = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
-
+                        Console.WriteLine($"Stundenten du har valt är {std2.StudentId} {std2.FirstName} {std2.LastName} {std2.City}");
                         Console.WriteLine("Skriv in det rätta efternamnet:");
                         std2.LastName = Console.ReadLine();
                         dbCtx.SaveChanges();
@@ -65,7 +67,7 @@ namespace StudentRegInlämning
 
                         case 3:
                         var std3 = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
-
+                        Console.WriteLine($"Stundenten du har valt är {std3.StudentId} {std3.FirstName} {std3.LastName} {std3.City}");
                         Console.WriteLine("Skriv in den rätta staden:");
                         std3.City = Console.ReadLine();
                         dbCtx.SaveChanges();
@@ -75,6 +77,10 @@ namespace StudentRegInlämning
                         return;
                 }
 
+            }
+            else
+            {
+                Console.WriteLine("Det finns ingen student med detta id. Försök igen.");
             }
 
         }

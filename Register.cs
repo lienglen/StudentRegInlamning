@@ -31,7 +31,20 @@ namespace StudentRegInlämning
             Console.WriteLine($"Du har registrerat följande:\nFörnamn: {firstName}\nEfternamn: {lastName}\nStad: {city}");
         }
 
-        public void ChangeStudent()
+        public void ChangeStudent(int studentChoice)
+        {
+            var std = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
+            Console.WriteLine($"Stundenten du har valt är {std.StudentId} {std.FirstName} {std.LastName} {std.City}");
+
+            Console.WriteLine("Skriv in din ändring:");
+            std.FirstName = Console.ReadLine();
+
+            Console.WriteLine($"Studenten är nu registrerad som: {std.StudentId} {std.FirstName} {std.LastName} {std.City}");
+            dbCtx.SaveChanges();
+            
+        }
+
+        public void ChangeStudentChoice()
         {
             Console.WriteLine("Vilken student vill du ändra? Ange Student-ID med en siffra:");
             int studentChoice = Convert.ToInt32(Console.ReadLine());
@@ -49,28 +62,31 @@ namespace StudentRegInlämning
                 switch (changeChoice)
                 {
                    case 1:
-                       
-                        var std1 = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
-                        Console.WriteLine($"Stundenten du har valt är {std1.StudentId} {std1.FirstName} {std1.LastName} {std1.City}");
-                        Console.WriteLine("Skriv in det rätta förnamnet:");
-                        std1.FirstName = Console.ReadLine();
-                        dbCtx.SaveChanges();
+
+                        //var std1 = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
+                        //Console.WriteLine($"Stundenten du har valt är {std1.StudentId} {std1.FirstName} {std1.LastName} {std1.City}");
+                        //Console.WriteLine("Skriv in det rätta förnamnet:");
+                        //std1.FirstName = Console.ReadLine();
+                        //dbCtx.SaveChanges();
+                        ChangeStudent(changeChoice);
                         return;
 
                         case 2:
-                        var std2 = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
-                        Console.WriteLine($"Stundenten du har valt är {std2.StudentId} {std2.FirstName} {std2.LastName} {std2.City}");
-                        Console.WriteLine("Skriv in det rätta efternamnet:");
-                        std2.LastName = Console.ReadLine();
-                        dbCtx.SaveChanges();
+                        //var std2 = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
+                        //Console.WriteLine($"Stundenten du har valt är {std2.StudentId} {std2.FirstName} {std2.LastName} {std2.City}");
+                        //Console.WriteLine("Skriv in det rätta efternamnet:");
+                        //std2.LastName = Console.ReadLine();
+                        //dbCtx.SaveChanges();
+                        ChangeStudent(changeChoice);
                         return;
 
                         case 3:
-                        var std3 = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
-                        Console.WriteLine($"Stundenten du har valt är {std3.StudentId} {std3.FirstName} {std3.LastName} {std3.City}");
-                        Console.WriteLine("Skriv in den rätta staden:");
-                        std3.City = Console.ReadLine();
-                        dbCtx.SaveChanges();
+                        //var std3 = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
+                        //Console.WriteLine($"Stundenten du har valt är {std3.StudentId} {std3.FirstName} {std3.LastName} {std3.City}");
+                        //Console.WriteLine("Skriv in den rätta staden:");
+                        //std3.City = Console.ReadLine();
+                        //dbCtx.SaveChanges();
+                        ChangeStudent(changeChoice);
                         return;
                     default:
                         Console.WriteLine("Vänligen välj ett av alternativen 1-3");

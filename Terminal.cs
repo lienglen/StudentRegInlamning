@@ -28,7 +28,7 @@ namespace StudentRegInlämning
             else if (input == 2)
             {
                 Console.WriteLine("Du har valt att ändra en student");
-                register.ChangeStudentChoice();
+                register.ChangeStudent();
             }
             else if (input == 3)
             {

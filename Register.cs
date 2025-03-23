@@ -31,73 +31,81 @@ namespace StudentRegInlämning
             Console.WriteLine($"Du har registrerat följande:\nFörnamn: {firstName}\nEfternamn: {lastName}\nStad: {city}");
         }
 
-        public void ChangeStudent(int studentChoice)
+
+        public void ChangeStudent()
         {
-            var std = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
-            Console.WriteLine($"Stundenten du har valt är {std.StudentId} {std.FirstName} {std.LastName} {std.City}");
-
-            Console.WriteLine("Skriv in din ändring:");
-            std.FirstName = Console.ReadLine();
-
-            Console.WriteLine($"Studenten är nu registrerad som: {std.StudentId} {std.FirstName} {std.LastName} {std.City}");
-            dbCtx.SaveChanges();
-            
-        }
-
-        public void ChangeStudentChoice()
-        {
-            Console.WriteLine("Vilken student vill du ändra? Ange Student-ID med en siffra:");
+            Console.WriteLine("Vilken student vill du ändra? Ange student-id med en siffra:");
             int studentChoice = Convert.ToInt32(Console.ReadLine());
-             
+            
+            Console.WriteLine("Vad vill du ändra? Välj ett av följande alternativ:" +
+            "\n[1] Förnamnet" +
+            "\n[2] Efternamnet" +
+            "\n[3] Staden");
 
-            if (studentChoice != 0) 
-            {
-                Console.WriteLine("Vad vill du ändra? Välj ett av följande alterativ:" +
-               "\n[1] Förnamnet" +
-               "\n[2] Efternamnet" +
-               "\n[3] Staden");
-
-                int changeChoice = Convert.ToInt32(Console.ReadLine());
+            int changeChoice = Convert.ToInt32(Console.ReadLine());
 
                 switch (changeChoice)
                 {
                    case 1:
+                        var std1 = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
 
-                        //var std1 = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
-                        //Console.WriteLine($"Stundenten du har valt är {std1.StudentId} {std1.FirstName} {std1.LastName} {std1.City}");
-                        //Console.WriteLine("Skriv in det rätta förnamnet:");
-                        //std1.FirstName = Console.ReadLine();
-                        //dbCtx.SaveChanges();
-                        ChangeStudent(changeChoice);
+                    if (std1 != null)
+                    {
+                        Console.WriteLine($"Studenten du har valt är {std1.StudentId} {std1.FirstName} {std1.LastName} {std1.City}");
+                        Console.WriteLine("Skriv in det rätta förnamnet:");
+                        std1.FirstName = Console.ReadLine();
+
+                        Console.WriteLine($"Studenten med student-id: {std1.StudentId} är nu ändrad till: {std1.FirstName} {std1.LastName} {std1.City} ");
+                        dbCtx.SaveChanges();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Studenten hittades inte. Försök igen");
+                    }   
+
                         return;
 
                         case 2:
-                        //var std2 = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
-                        //Console.WriteLine($"Stundenten du har valt är {std2.StudentId} {std2.FirstName} {std2.LastName} {std2.City}");
-                        //Console.WriteLine("Skriv in det rätta efternamnet:");
-                        //std2.LastName = Console.ReadLine();
-                        //dbCtx.SaveChanges();
-                        ChangeStudent(changeChoice);
-                        return;
+                        var std2 = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
+                    if ( std2 != null)
+                    {
+                        Console.WriteLine($"Studenten du har valt är {std2.StudentId} {std2.FirstName} {std2.LastName} {std2.City}");
+                        Console.WriteLine("Skriv in det rätta efternamnet:");
+                        std2.LastName = Console.ReadLine();
+
+                        Console.WriteLine($"Studenten med student-id: {std2.StudentId} är nu ändrad till: {std2.FirstName} {std2.LastName} {std2.City} ");
+
+                        dbCtx.SaveChanges();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Studenten hittades inte. Försök igen");
+                    }
+
+                    return;
 
                         case 3:
-                        //var std3 = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
-                        //Console.WriteLine($"Stundenten du har valt är {std3.StudentId} {std3.FirstName} {std3.LastName} {std3.City}");
-                        //Console.WriteLine("Skriv in den rätta staden:");
-                        //std3.City = Console.ReadLine();
-                        //dbCtx.SaveChanges();
-                        ChangeStudent(changeChoice);
-                        return;
+                        var std3 = dbCtx.Students.Where(s => s.StudentId == studentChoice).FirstOrDefault<Student>();
+                    if( std3 != null)
+                    {
+                        Console.WriteLine($"Studenten du har valt är {std3.StudentId} {std3.FirstName} {std3.LastName} {std3.City}");
+                        Console.WriteLine("Skriv in den rätta staden:");
+                        std3.City = Console.ReadLine();
+
+                        Console.WriteLine($"Studenten med student-id: {std3.StudentId} är nu ändrad till: {std3.FirstName} {std3.LastName} {std3.City} ");
+
+                        dbCtx.SaveChanges();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Studenten hittades inte. Försök igen");
+                    }
+
+                    return;
                     default:
                         Console.WriteLine("Vänligen välj ett av alternativen 1-3");
                         return;
                 }
-
-            }
-            else
-            {
-                Console.WriteLine("Det finns ingen student med detta id. Försök igen.");
-            }
 
         }
 
@@ -111,5 +119,7 @@ namespace StudentRegInlämning
 
             dbCtx.SaveChanges();
         }
+
+       
     }
 }
